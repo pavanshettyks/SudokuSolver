@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 function Block(props) {
 
     const updateValue =(e) =>{
-
-        console.log(e.target.value)
         let data ={
             value:e.target.value,
             row:props.row,
@@ -17,10 +15,16 @@ function Block(props) {
     
     return (
         <div style={columnStyle}>
-            <p>{props.block_data}</p>
+            {/* <p> {props.sudoku[props.row][props.column]}</p> */}
             <input type="number" value={props.block_data} onChange ={updateValue}  />
+
         </div>
     )
+}
+const mapStateToProps = (state) => {
+    return {
+        sudoku: state.SudokuReducer.puzzle,
+    }
 }
 
 const mapDispatchToProps = dispatcher =>{
@@ -33,7 +37,12 @@ const mapDispatchToProps = dispatcher =>{
 
 const columnStyle = {
     display:'flex',
-    padding:'2px'
+    padding:'2px',
+
+    justifyContent:'center',
+    alignItems:'center',
+    textAlign:'center'
+ 
   }
 
-  export default connect(null, mapDispatchToProps)(Block)
+  export default connect(mapStateToProps, mapDispatchToProps)(Block)

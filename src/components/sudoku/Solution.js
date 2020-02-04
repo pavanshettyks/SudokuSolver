@@ -1,12 +1,34 @@
 
 import React from 'react'
+import { connect } from 'react-redux';
 
-export default function Solution() {
+function Solution(props) {
+
+    const solver= () =>{
+        console.log("trigger")
+        props.solver();
+    }
     return (
 
-            <div>
-                <h3>Solution button goes here</h3>
+            <div onClick={solver}>
+                <h1>Click to Solve</h1>
+                <h5>{props.msg}</h5>
+
             </div>
   
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        msg:state.SudokuReducer.msg
+    }
+}
+
+const mapDispatchToProps = dispatcher =>{
+    return {
+        solver: () =>dispatcher({ type:'solver'})
+        }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Solution)

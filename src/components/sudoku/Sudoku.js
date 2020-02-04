@@ -29,22 +29,21 @@ function Sudoku(props) {
 
             <div>
                 <Solution/>
-                <div style={{ display:'flex', flexDirection:'column', textAlign: 'center',alignItems:'center',justifyContent:'center', alignContent:'center'}}>
+                <div style={{  display:'flex', flexDirection:'column', alignItems:'center',justifyContent:'center', alignContent:'center'}}>
                 {
                     props.sudoku.map((column_data,row) => { 
                                                     return <RowData id = {row} row={row} column_data ={column_data}  />
                                               }
                                     )  
                 }
-                {console.log(props)}
                 </div>
             </div>
   
     )
 }
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
+
         sudoku: state.SudokuReducer.puzzle,
     }
 }
